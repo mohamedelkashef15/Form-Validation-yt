@@ -59,6 +59,11 @@ body {
   outline: #fe3737;
 }
 
+.error {
+  color: #fe3737;
+  font-size: 14px;
+}
+
 #contactForm .btn-submit {
   width: 100%;
   background-color: #fe3737;
