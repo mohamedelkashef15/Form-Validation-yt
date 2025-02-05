@@ -1,4 +1,8 @@
 const contactForm = document.getElementById("contactForm");
+const name = document.getElementById("name").value.trim();
+const email = document.getElementById("email").value.trim();
+const phone = document.getElementById("phone").value.trim();
+const message = document.getElementById("message").value.trim();
 
 document.addEventListener("DOMContentLoaded", function () {
   emailjs.init("aPxhON1l-fQQaBOQa"); // Replace with your EmailJS public key
@@ -14,11 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function validateForm() {
-  let name = document.getElementById("name").value.trim();
-  let email = document.getElementById("email").value.trim();
-  let phone = document.getElementById("phone").value.trim();
-  let message = document.getElementById("message").value.trim();
-
   let nameError = document.getElementById("nameError");
   let emailError = document.getElementById("emailError");
   let phoneError = document.getElementById("phoneError");
@@ -48,6 +47,7 @@ function validateForm() {
     isValid = false;
   }
 
+  // Phone validation
   if (phone.length < 11 || phone.length > 11) {
     phoneError.textContent = "Invalid phone number. ";
   }
