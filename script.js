@@ -1,79 +1,75 @@
-const contactForm = document.getElementById("contactForm");
-const name = document.getElementById("name").value.trim();
-const email = document.getElementById("email").value.trim();
-const phone = document.getElementById("phone").value.trim();
-const message = document.getElementById("message").value.trim();
+/*
+  - show success message
+  - show error message
 
-document.addEventListener("DOMContentLoaded", function () {
-  emailjs.init("aPxhON1l-fQQaBOQa"); // Replace with your EmailJS public key
+  - Form Sumbit
+    - name validation 
+    - email validation 
+    - phone validation 
+    - message validation 
+  
+  try to submit with one value 
+  - add isValid to preventDefault in case of is Valid is false
+*/
 
-  contactForm.addEventListener("submit", function (e) {
-    e.preventDefault(); // Prevent default form submission
+const form = document.getElementById("contactForm");
+const username = document.getElementById("username");
+const email = document.getElementById("email");
+const phone = document.getElementById("phone");
 
-    let valid = validateForm();
-    if (valid) {
-      sendEmail();
-    }
-  });
-});
+function showError(input, message) {
+  // username.parentElement
+  const formControl = input.parentElement;
+  formControl.className = "form-control error";
 
-function validateForm() {
-  let nameError = document.getElementById("nameError");
-  let emailError = document.getElementById("emailError");
-  let phoneError = document.getElementById("phoneError");
-  let messageError = document.getElementById("messageError");
+  const span = formControl.querySelector("span");
+  span.innerText = message;
+}
 
-  // Clear previous errors
-  nameError.textContent = "";
-  emailError.textContent = "";
-  phoneError.textContent = "";
+function showSuccess(input) {
+  const formControl = input.parentElement;
+  formControl.className = "form-control";
+}
 
-  messageError.textContent = "";
-
+form.addEventListener("submit", function (e) {
   let isValid = true;
 
-  // Name validation
-  if (name === "") {
-    nameError.textContent = "Name is required";
+  // Username validation
+  if (username.value.trim() === "") {
+    showError(username, "Username is required");
     isValid = false;
+  } else {
+    showSuccess(username);
   }
 
-  // Email validation
-  if (email === "") {
-    emailError.textContent = "Email is required";
+  // email validation
+  if (email.value.trim() === "") {
+    showError(email, "Email is required");
     isValid = false;
-  } else if (!/^\S+@\S+\.\S+$/.test(email)) {
-    emailError.textContent = "Invalid email format";
-    isValid = false;
+  } else {
+    showSuccess(email);
   }
 
-  // Phone validation
-  if (phone.length < 11 || phone.length > 11) {
-    phoneError.textContent = "Invalid phone number. ";
+  // phone validation
+  if (phone.value.trim() === "") {
+    showError(phone, "Phone is required");
+    isValid = false;
+  } else if (phone.value.length !== 11) {
+    showError(phone, "Enter a valid phone number with 11 numbers");
+    isValid = false;
+  } else {
+    showSuccess(phone);
   }
 
   // Message validation
-  if (message === "") {
-    messageError.textContent = "Message is required";
+  if (message.value.trim() === "") {
+    showError(message, "Message is required");
     isValid = false;
+  } else {
+    showSuccess(message);
   }
 
-  return isValid;
-}
-
-function sendEmail() {
-  let name = document.getElementById("name").value;
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value; // Not recommended for real apps!
-  let message = document.getElementById("message").value;
-
-  emailjs.send("service_l6ofpdi", "template_panv6xw", { name, email, password, message }).then(
-    function (response) {
-      console.log("Email sent successfully!", response);
-      document.getElementById("contactForm").reset();
-    },
-    function (error) {
-      console.error("Email failed to send!", error);
-    }
-  );
-}
+  if (!isValid) {
+    e.preventDefault();
+  }
+});

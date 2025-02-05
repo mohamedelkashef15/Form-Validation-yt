@@ -12,27 +12,27 @@
 <body>
   <main id="main">
     <div class="container">
-      <form id="contactForm">
-        <h1>Contact US</h1>
+      <form id="contactForm" action="https://formsubmit.co/contact@mohamedelkashef.com" method="POST">
+        <h1>Contact Us</h1>
         <div class="form-control">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name">
-          <span class="error" id="nameError"></span>
+          <label for="name">Username</label>
+          <input type="text" id="username" name="username">
+          <span></span>
         </div>
         <div class="form-control">
           <label for="email">Email</label>
           <input type="email" id="email" name="email">
-          <span class="error" id="emailError"></span>
+          <span></span>
         </div>
         <div class="form-control">
           <label for="email">Phone</label>
           <input type="number" id="phone" name="phone">
-          <span class="error" id="phoneError"></span>
+          <span></span>
         </div>
         <div class="form-control">
           <label for="message">Message</label>
           <textarea name="message" id="message" rows="5" placeholder="Enter your Message ..."></textarea>
-          <span class="error" id="messageError"></span>
+          <span></span>
         </div>
         <button type="submit" class="btn-submit">Send</button>
       </form>

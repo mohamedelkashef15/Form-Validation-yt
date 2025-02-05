@@ -56,12 +56,23 @@ body {
 #contactForm .form-control input:focus,
 #contactForm .form-control textarea:focus {
   border-color: #fe3737;
-  outline: #fe3737;
+  outline: 0;
 }
 
-.error {
+#contactForm .form-control span {
   color: #fe3737;
   font-size: 14px;
+  visibility: hidden;
+}
+
+/* Error */
+#contactForm .form-control.error input,
+#contactForm .form-control.error textarea {
+  border-color: #fe3737;
+}
+
+#contactForm .form-control.error span {
+  visibility: visible;
 }
 
 #contactForm .btn-submit {
